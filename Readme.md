@@ -1,4 +1,4 @@
-# Discrete_HMM_Cplusplus
+# Discrete HMM
 - **Discrete Hidden Markov Model Implementation in C++**
 - **Work in Progress**
 
