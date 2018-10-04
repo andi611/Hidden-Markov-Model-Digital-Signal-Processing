@@ -1,18 +1,19 @@
 # Discrete_HMM_Cplusplus
 **Discrete Hidden Markov Model Implementation in C++**
-**Work in Progress**
+
+## **Work in Progress**
 
 ## ====== File description ====== 
-+- dsp_hw1/ 
-   +-  src/
-   |     +-                    some hmm program
-   +-  modellist.txt           model list to train
-   +-  model_init.txt          initial model for training
-   +-  seq_model_01~05.txt     training data observation
-   +-  testing_data1.txt       testing data  observation
-   +-  testing_answer.txt      answer for "testing_data1.txt"
-   +-  testing_data2.txt       testing data without answer
--
+- +- dsp_hw1/ 
+-   +-  src/
+-   |     +-                    some hmm program
+-   +-  modellist.txt           model list to train
+-   +-  model_init.txt          initial model for training
+-   +-  seq_model_01~05.txt     training data observation
+-   +-  testing_data1.txt       testing data  observation
+-   +-  testing_answer.txt      answer for "testing_data1.txt"
+-   +-  testing_data2.txt       testing data without answer
+
 ## ====== Program Execute ======
 src:
  make
