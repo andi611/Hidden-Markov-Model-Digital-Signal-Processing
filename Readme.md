@@ -29,7 +29,7 @@
     ├── ./test modellist.txt testing_data2.txt result2.txt
 $iter is positive integer, which is iteration of Baum-Welch algorithm.
 ```
--
+
 ## Handout 
 1. Include all program files  ( train.c, test.c, etc. )
 2. trained HMM:    model_01.txt ~ model_05.txt
@@ -37,16 +37,16 @@ $iter is positive integer, which is iteration of Baum-Welch algorithm.
 4. acc.txt : The accuracy of testing_data.txt
 5. Document ( including your name, student ID, compile and run-time environment, iterations and what you learned from this homework. )
 
-* upload to Cieba *
+* upload to Cieba
  - Compress all your files to hw1_[studentID].zip
  - with the following format! ( Attention! There is a directory in the zip, name after your student ID.
 
  - hw1_[studentID].zip
- +- hw1_[studentID]
-    +- train.c/.cpp
-    +- test.c/.cpp
-    +- Makefile
-    +- model_01~05.txt
-    +- result1~2.txt 
-    +- acc.txt
-    +- Document.pdf (pdf)
+ - hw1_[studentID]
+    - train.c/.cpp
+    - test.c/.cpp
+    - Makefile
+    - model_01~05.txt
+    - result1~2.txt 
+    - acc.txt
+    - Document.pdf (pdf)
