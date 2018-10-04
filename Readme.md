@@ -1,4 +1,4 @@
-# Discrete HMM
+# Digital Signal Processing: Discrete HMM
 - **Discrete Hidden Markov Model Implementation in C++**
 - **Work in Progress**
 
