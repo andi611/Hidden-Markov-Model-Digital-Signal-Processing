@@ -1,6 +1,6 @@
 # Discrete_HMM_Cplusplus
-**Discrete Hidden Markov Model Implementation in C++**
-**Work in Progress**
+- **Discrete Hidden Markov Model Implementation in C++**
+- **Work in Progress**
 
 ## File description
 ```
@@ -17,16 +17,18 @@
 ```
 
 ## Program Execute
-src:
- make
- ./train $iter model_init.txt seq_model_01.txt model_01.txt
- ./train $iter model_init.txt seq_model_02.txt model_02.txt
- ./train $iter model_init.txt seq_model_03.txt model_03.txt
- ./train $iter model_init.txt seq_model_04.txt model_04.txt
- ./train $iter model_init.txt seq_model_05.txt model_05.txt
- ./test modellist.txt testing_data1.txt result1.txt
- ./test modellist.txt testing_data2.txt result2.txt
+```
+├── src:
+    ├── make
+    ├── ./train $iter model_init.txt seq_model_01.txt model_01.txt
+    ├── ./train $iter model_init.txt seq_model_02.txt model_02.txt
+    ├── ./train $iter model_init.txt seq_model_03.txt model_03.txt
+    ├── ./train $iter model_init.txt seq_model_04.txt model_04.txt
+    ├── ./train $iter model_init.txt seq_model_05.txt model_05.txt
+    ├── ./test modellist.txt testing_data1.txt result1.txt
+    ├── ./test modellist.txt testing_data2.txt result2.txt
 $iter is positive integer, which is iteration of Baum-Welch algorithm.
+```
 -
 ## Handout 
 1. Include all program files  ( train.c, test.c, etc. )
