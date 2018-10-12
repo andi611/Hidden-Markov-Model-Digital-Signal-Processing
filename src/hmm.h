@@ -7,14 +7,15 @@
 #include <math.h>
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <string>
-#include <iomanip>
 #include <vector>
+#include <float.h>
 using namespace std;
 
 #ifndef MAX_STATE
-#	define MAX_STATE	10
+#	define MAX_STATE 	10
 #endif
 
 #ifndef MAX_OBSERV
@@ -29,6 +30,12 @@ using namespace std;
 #	define MAX_LINE 	256
 #endif
 
+#ifndef NUM_MODEL
+#	define NUM_MODEL 	5
+#endif
+
+FILE* open_or_die(const char* filename, const char* ht);
+
 /******************************************/
 /*        class Hidden Markov Model       */
 /******************************************/
@@ -36,24 +43,19 @@ class HMM
 {
 public:
 	// Constructor
-	HMM(const string name, const int s_n, const int o_n){
-		_model_name = name;
-		_state_num = s_n;
-		_observ_num = o_n;
-		initialize_HMM();
-	};
+	HMM() { initialize_HMM(); };
 
-	// utility functions
-	bool read_input_table (const string&);
-	void display_input (bool display_table = false) const;
-	void display_output () const;
-	void save_output (const string&) const;
-
-	// conputational functions
-	void compute_BC_memorization ();
-	void compute_BC_iteration ();
+	// model I/O
+	void load_HMM (const char *filename);	// load model
+	void dump_HMM (FILE *fp) const;			// store model
 
 private:
+	// private functions
+	void initialize_HMM();
+
+    // helper functions
+
+
 	// class members
 	string 						_model_name;
 	int 						_state_num; 	//number of state
@@ -62,164 +64,121 @@ private:
 	vector< vector<double> > 	_transition;	//transition prob
 	vector< vector<double> > 	_observation;	//observation prob
 
-	// private functions
-	void initialize_HMM();
-    // helper functions
 
- };
+};
 
 
 void HMM::initialize_HMM () 
 {
-	
+	_initial = vector<double> (MAX_STATE, FLT_MAX);
+	_transition = vector< vector<double> >(MAX_STATE, vector<double>(MAX_STATE, FLT_MAX));
+	_observation = vector< vector<double> >(MAX_OBSERV, vector<double>(MAX_STATE, FLT_MAX));
 }
 
-static void HMM::dumpHMM (const string& model_name)
+
+void HMM::load_HMM(const char* filename)
 {
-	int i, j;
-	ofstream model;
-    model.open (model_name.c_str());
-    
+   	int i, j;
+   	FILE* fp = open_or_die( filename, "r");
+
+   	string str(filename);
+   	_model_name = str;
+
+   	char token[MAX_LINE] = "";
+   	while( fscanf( fp, "%s", token ) > 0 )
+   	{
+	  	if( token[0] == '\0' || token[0] == '\n' ) continue;
+
+	  	if( strcmp( token, "initial:" ) == 0 ) {
+		 	fscanf(fp, "%d", &_state_num );
+		 	for( i = 0 ; i < _state_num ; i++ )
+				fscanf(fp, "%lf", &( _initial[i] ) );
+	  	}
+	  	else if( strcmp( token, "transition:" ) == 0 ) {
+		 	fscanf(fp, "%d", &_state_num );
+		 	for( i = 0 ; i < _state_num ; i++ )
+				for( j = 0 ; j < _state_num ; j++ )
+			   		fscanf(fp, "%lf", &(_transition[i][j]));
+	  	}
+	  	else if( strcmp( token, "observation:" ) == 0 ) {
+		 	fscanf(fp, "%d", &_observ_num );
+		 	for( i = 0 ; i < _observ_num ; i++ )
+				for( j = 0 ; j < _state_num ; j++ )
+			   		fscanf(fp, "%lf", &( _observation[i][j]) );
+	  	}
+   	}
 }
 
-static void dumpHMM( FILE *fp, HMM *hmm )
+
+void HMM::dump_HMM(FILE *fp) const
 {
-   int i, j;
+   	int i, j;
 
-   //fprintf( fp, "model name: %s\n", hmm->model_name );
-   fprintf( fp, "initial: %d\n", hmm->state_num );
-   for( i = 0 ; i < hmm->state_num - 1; i++ )
-	  fprintf( fp, "%.5lf ", hmm->initial[i]);
-   fprintf(fp, "%.5lf\n", hmm->initial[ hmm->state_num - 1 ] );
+   	fprintf( fp, "\nmodel name: %s\n", _model_name.c_str() );
+   	fprintf( fp, "initial: %d\n", _state_num );
+   	for( i = 0 ; i < _state_num - 1; i++ )
+	  	fprintf( fp, "%.5lf ", _initial[i]);
+   	fprintf(fp, "%.5lf\n", _initial[ _state_num - 1 ] );
 
-   fprintf( fp, "\ntransition: %d\n", hmm->state_num );
-   for( i = 0 ; i < hmm->state_num ; i++ ){
-	  for( j = 0 ; j < hmm->state_num - 1 ; j++ )
-		 fprintf( fp, "%.5lf ", hmm->transition[i][j] );
-	  fprintf(fp,"%.5lf\n", hmm->transition[i][hmm->state_num - 1]);
-   }
-
-   fprintf( fp, "\nobservation: %d\n", hmm->observ_num );
-   for( i = 0 ; i < hmm->observ_num ; i++ ){
-	  for( j = 0 ; j < hmm->state_num - 1 ; j++ )
-		 fprintf( fp, "%.5lf ", hmm->observation[i][j] );
-	  fprintf(fp,"%.5lf\n", hmm->observation[i][hmm->state_num - 1]);
-   }
+   	fprintf( fp, "\ntransition: %d\n", _state_num );
+   	for( i = 0 ; i < _state_num ; i++ ) {
+	 	for( j = 0 ; j < _state_num - 1 ; j++ )
+		 	fprintf( fp, "%.5lf ", _transition[i][j] );
+	  	fprintf(fp,"%.5lf\n", _transition[i][_state_num - 1]);
+   	}
+   	fprintf( fp, "\nobservation: %d\n", _observ_num );
+   	for( i = 0 ; i < _observ_num ; i++ ) {
+	  	for( j = 0 ; j < _state_num - 1 ; j++ )
+		 	fprintf( fp, "%.5lf ", _observation[i][j] );
+	  	fprintf(fp,"%.5lf\n", _observation[i][_state_num - 1]);
+   	}
 }
+
+
 /*************************************/
-/*        Implementation in C        */
+/*        I/O functions        */
 /*************************************/
-/*
-typedef struct{
-   char *model_name;
-   int state_num;					//number of state
-   int observ_num;					//number of observation
-   double initial[MAX_STATE];			//initial prob.
-   double transition[MAX_STATE][MAX_STATE];	//transition prob.
-   double observation[MAX_OBSERV][MAX_STATE];	//observation prob.
-} HMM;
-
-static FILE *open_or_die( const char *filename, const char *ht )
+FILE* open_or_die(const char* filename, const char* ht)
 {
-   FILE *fp = fopen( filename, ht );
-   if( fp == NULL ){
-	  perror( filename);
-	  exit(1);
-   }
-
-   return fp;
+   	FILE* fp = fopen(filename, ht);
+   	if( fp == NULL ){
+	  	perror(filename);
+	  	exit(1);
+   	}
+   	return fp;
 }
 
-static void loadHMM( HMM *hmm, const char *filename )
+
+vector<HMM*>* load_models(const char* model_list, const int max_num)
 {
-   int i, j;
-   FILE *fp = open_or_die( filename, "r");
+   	FILE *fp = open_or_die(model_list, "r");
 
-   hmm->model_name = (char *)malloc( sizeof(char) * (strlen( filename)+1));
-   strcpy( hmm->model_name, filename );
+   	int count = 0;
+   	char filename[MAX_LINE] = "";
+   	vector<HMM*>* HMM_L = new vector<HMM*>();
+   	HMM* hmm;
 
-   char token[MAX_LINE] = "";
-   while( fscanf( fp, "%s", token ) > 0 )
-   {
-	  if( token[0] == '\0' || token[0] == '\n' ) continue;
-
-	  if( strcmp( token, "initial:" ) == 0 ){
-		 fscanf(fp, "%d", &hmm->state_num );
-
-		 for( i = 0 ; i < hmm->state_num ; i++ )
-			fscanf(fp, "%lf", &( hmm->initial[i] ) );
-	  }
-	  else if( strcmp( token, "transition:" ) == 0 ){
-		 fscanf(fp, "%d", &hmm->state_num );
-
-		 for( i = 0 ; i < hmm->state_num ; i++ )
-			for( j = 0 ; j < hmm->state_num ; j++ )
-			   fscanf(fp, "%lf", &( hmm->transition[i][j] ));
-	  }
-	  else if( strcmp( token, "observation:" ) == 0 ){
-		 fscanf(fp, "%d", &hmm->observ_num );
-
-		 for( i = 0 ; i < hmm->observ_num ; i++ )
-			for( j = 0 ; j < hmm->state_num ; j++ )
-			   fscanf(fp, "%lf", &( hmm->observation[i][j]) );
-	  }
-   }
+   	while(fscanf(fp, "%s", filename) == 1) {
+   		hmm = new HMM();
+	  	hmm->load_HMM(filename);
+	  	HMM_L->push_back(hmm);
+	  	count ++;
+	  	if(count >= max_num)
+		 	return HMM_L;
+   	}
+   	fclose(fp);
+   	return HMM_L;
 }
 
-static void dumpHMM( FILE *fp, HMM *hmm )
+
+void dump_models(vector<HMM*>* HMM_L, const int num)
 {
-   int i, j;
-
-   //fprintf( fp, "model name: %s\n", hmm->model_name );
-   fprintf( fp, "initial: %d\n", hmm->state_num );
-   for( i = 0 ; i < hmm->state_num - 1; i++ )
-	  fprintf( fp, "%.5lf ", hmm->initial[i]);
-   fprintf(fp, "%.5lf\n", hmm->initial[ hmm->state_num - 1 ] );
-
-   fprintf( fp, "\ntransition: %d\n", hmm->state_num );
-   for( i = 0 ; i < hmm->state_num ; i++ ){
-	  for( j = 0 ; j < hmm->state_num - 1 ; j++ )
-		 fprintf( fp, "%.5lf ", hmm->transition[i][j] );
-	  fprintf(fp,"%.5lf\n", hmm->transition[i][hmm->state_num - 1]);
-   }
-
-   fprintf( fp, "\nobservation: %d\n", hmm->observ_num );
-   for( i = 0 ; i < hmm->observ_num ; i++ ){
-	  for( j = 0 ; j < hmm->state_num - 1 ; j++ )
-		 fprintf( fp, "%.5lf ", hmm->observation[i][j] );
-	  fprintf(fp,"%.5lf\n", hmm->observation[i][hmm->state_num - 1]);
-   }
+   	for(int i = 0; i < num ; ++i ) { 
+	  	// FILE *fp = open_or_die( hmm[i].model_name, "w" );
+	  	HMM_L->at(i)->dump_HMM(stderr);
+   	}
 }
 
-static int load_models( const char *listname, HMM *hmm, const int max_num )
-{
-   FILE *fp = open_or_die( listname, "r" );
-
-   int count = 0;
-   char filename[MAX_LINE] = "";
-   while( fscanf(fp, "%s", filename) == 1 ){
-	  loadHMM( &hmm[count], filename );
-	  count ++;
-
-	  if( count >= max_num ){
-		 return count;
-	  }
-   }
-   fclose(fp);
-
-   return count;
-}
-
-static void dump_models( HMM *hmm, const int num )
-{
-   int i = 0;
-   for( ; i < num ; i++ ){ 
-	  //		FILE *fp = open_or_die( hmm[i].model_name, "w" );
-	  dumpHMM( stderr, &hmm[i] );
-   }
-}
-
-*/
 
 #endif
 
