@@ -3,14 +3,9 @@
 
 int main()
 {
-	vector<HMM*>* HMM_head;
-	HMM_head = load_models("modellist.txt", NUM_MODEL);
-	dump_models(HMM_head, 5);
-/*
-	HMM* hmm = new HMM();
-	hmm->loadHMM("../model_init.txt");
-	hmm->dumpHMM(stderr);
-*/
+	vector<HMM*>* HMM_HEAD = load_new_models("../data/model_init.txt", "modellist.txt", NUM_MODEL);
+
+	dump_models(HMM_HEAD, NUM_MODEL, true);
 
 	return 0;
 }

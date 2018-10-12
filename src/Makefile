@@ -1,4 +1,4 @@
-.PHONY: all clean
+.PHONY: clean all
 
 TARGET1 = test_hmm
 TARGET2 = train_hmm
@@ -7,7 +7,7 @@ TARGET2 = train_hmm
 all: $(TARGET1) $(TARGET2)
 
 CC = g++
-CFLAGS = -ansi -Wall -std=c++11 -O3 
+CFLAGS = -ansi -std=c++11 -O3 
 LDFLAGS = -lm # link to math library
 
 $(TARGET1): test_hmm.cpp
