@@ -1,7 +1,7 @@
 .PHONY: clean all
 
-TARGET1 = test_hmm
-TARGET2 = train_hmm
+TARGET1 = test
+TARGET2 = train
 
 # type make/make all to compile test_hmm
 all: $(TARGET1) $(TARGET2)
@@ -11,10 +11,10 @@ CFLAGS = -ansi -std=c++11 -O3
 LDFLAGS = -lm # link to math library
 
 $(TARGET1): test_hmm.cpp
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $(TARGET1) $(TARGET1).cpp
+	$(CC) hmm.cpp test_hmm.cpp $(CFLAGS) $(LDFLAGS) -o $(TARGET1) 
 
 $(TARGET2): train_hmm.cpp
-	$(CC) $(CFLAGS) $(LDFLAGS) -o $(TARGET2) $(TARGET2).cpp
+	$(CC) hmm.cpp train_hmm.cpp $(CFLAGS) $(LDFLAGS) -o $(TARGET2) 
 
 # type make clean to remove the compiled file
 clean:
