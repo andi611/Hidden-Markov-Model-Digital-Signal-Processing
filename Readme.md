@@ -1,17 +1,26 @@
 # Digital Signal Processing: Discrete HMM
 - **Discrete Hidden Markov Model Implementation in C++**
 
+
 ## Environment
 * **< g++ [gcc version 7.3.0 (GCC)] >**
 * **< g++ [gcc version 4.2.1 (GCC)] >**
 
+
 ## Algorithm
 * **Initialization**: 
-	- Set θ=(A,B,π) with initial conditions (model_init.txt)
+	- Set θ = ( A , B , π ) with initial conditions (model_init.txt)
 * **Forward Procedure**: 
-	- Compute αi(t)=P(Y1=y1,...,Yt=yt,Xt=i|θ) recursively, the probability of seeing the y1,y2,...,yt and being in state i at time t.
-	- {\displaystyle \alpha _{i}(1)=\pi _{i}b_{i}(y_{1}),}
-	- {\displaystyle \alpha _{i}(t+1)=b_{i}(y_{t+1})\sum _{j=1}^{N}\alpha _{j}(t)a_{ji}.}
+	- Compute αi(t) = P( O1=o1, ..., Ot=ot, qt=i | θ ) recursively, the probability of seeing the observation sequence o1, o2, ..., ot and being in state i at time t.
+* **Backward Procedure**: 
+	- Compute βi(t) = P( Ot+1=ot+1, ..., OT=oT | qt=i, θ) recursively, the probability of the ending partial observation sequence ot+1, ..., oT given starting state i at time t.
+* **Accumulation Procedure**:
+	- Calculate the temporary variables, according to Bayes' theorem.
+	- Gamma: the probability of being in state i at time t given the observed sequence O and the parameters θ.
+	- Epsilon: the probability of being in state i and j at times t and t+1 respectively given the observed sequence O and parameters θ.
+* **Update Procedure**:
+	- Parameters of the hidden Markov model θ can now be updated: ( A , B , π ) = ( A* , B* , π* ) 
+
 
 ## File Description
 ```
@@ -37,7 +46,9 @@
 └── Readme.md                   This File
 ```
 
+
 ## Usage
+
 ### Train all 5 models separately then test
 ```
 └── src/
@@ -51,6 +62,7 @@
     └── ./test modellist.txt ../data/testing_data1.txt ../data/testing_result1.txt
 - #iteration is positive integer, which is the iteration of the Baum-Welch algorithm.
 ```
+
 ### Train all 5 models at once then test
 ```
 └── src/
@@ -60,6 +72,7 @@
     └── ./test modellist.txt ../data/testing_data1.txt ../data/testing_result1.txt
 - #iteration is positive integer, which is the iteration of the Baum-Welch algorithm.
 ```
+
 ### Train all 5 models at once, and calculate models' test score every iteration
 ```
 └── src/
@@ -69,6 +82,7 @@
     └── ./test modellist.txt ../data/testing_data1.txt ../data/testing_result1.txt
 - #iteration is positive integer, which is the iteration of the Baum-Welch algorithm.
 ```
+
 
 ## Experinment: Iteration v.s. Accuracy Plot
 ![]()
