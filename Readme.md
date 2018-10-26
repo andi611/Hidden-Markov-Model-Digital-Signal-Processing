@@ -4,9 +4,11 @@
 
 
 ## Environment
-* **< g++ [gcc version 7.3.0 (GCC)] >** 
-* **< g++ [gcc version 4.2.1 (GCC)] >**
-* (Tested environments)
+* **< g++ [gcc version 8.2.0 (GCC)] >** (Tested)
+* **< g++ [gcc version 7.3.0 (GCC)] >** (Tested)
+* **< g++ [gcc version 4.2.1 (GCC)] >** (Tested)
+* **< Python 3.6+ >**                   (Optional - for plot.py)
+* **< Matplotlib 2.2.3 >**              (Optional - for plot.py)
 
 ## Algorithm
 
@@ -39,8 +41,9 @@
 |   ├── hmm.cpp                 HMM implementation
 |   ├── test_hmm.cpp            Testing algorithm implementation
 |   ├── train_hmm.cpp           Training algorithm implementation
-|   ├── test                    Unix executable binary code for test_hmm.cpp
-|   ├── train                   Unix executable binary code for train_hmm.cpp
+|   ├── test                    Unix executable binary code for test_hmm.cpp  (See the next "Usage" section for more details)
+|   ├── train                   Unix executable binary code for train_hmm.cpp (See the next "Usage" section for more details)
+|   ├── plot.py                 Draws the training plot
 |   ├── model_01~05.txt         Trained models
 |   └── modellist.txt           Model name list
 ├── data/
@@ -89,6 +92,12 @@
     ├── ./train 250 ../data/model_init.txt ../data/ modellist.txt all test
     └── ./test modellist.txt ../data/testing_data1.txt ../data/testing_result1.txt
 - #iteration is positive integer, which is the iteration of the Baum-Welch algorithm.
+```
+
+### Draw Training Plot
+```
+└── src/
+    └── python3 plot.py
 ```
 
 

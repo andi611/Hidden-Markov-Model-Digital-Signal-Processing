@@ -6,6 +6,7 @@ TARGET2 = train
 # type make/make all to compile test_hmm
 all: $(TARGET1) $(TARGET2)
 
+# CC = g++-8
 CC = g++
 CFLAGS = -ansi -std=c++11 -O3 
 LDFLAGS = -lm # link to math library
