@@ -3,7 +3,8 @@
 
 
 ## Environment
-* **< g++ [gcc version 7.3.0 (GCC)] >**
+#### Tested environments:
+* **< g++ [gcc version 7.3.0 (GCC)] >** 
 * **< g++ [gcc version 4.2.1 (GCC)] >**
 
 
@@ -21,7 +22,7 @@
 	- Gamma: the probability of being in state **i** at time **t** given the observed sequence **O** and the parameters **θ**.
 	- Epsilon: the probability of being in state **i** and **j** at times **t** and **t+1** respectively given the observed sequence **O** and parameters **θ**.
 * **Update Procedure**:
-	- Parameters of the hidden Markov model θ can now be updated: **( A , B , π ) = ( A* , B* , π* )**
+	- Parameters of the hidden Markov model θ can now be updated: **( A , B , π ) = ( A^ , B^ , π^ )**
 
 ### Testing - [Viterbi Algorithm](https://en.wikipedia.org/wiki/Viterbi_algorithm)
 * A dynamic programming algorithm for finding the most likely sequence of hidden states, that results in a sequence of observed events.
@@ -56,7 +57,7 @@
 
 ## Usage
 
-### Train all 5 models separately then test
+### Train models separately, then test
 ```
 └── src/
     ├── make clean
@@ -70,17 +71,17 @@
 - #iteration is positive integer, which is the iteration of the Baum-Welch algorithm.
 ```
 
-### Train all 5 models at once then test
+### Train all models at once, then test
 ```
 └── src/
     ├── make clean
     ├── make
-    ├──  ./train 250 ../data/model_init.txt ../data/ modellist.txt all
+    ├── ./train 250 ../data/model_init.txt ../data/ modellist.txt all
     └── ./test modellist.txt ../data/testing_data1.txt ../data/testing_result1.txt
 - #iteration is positive integer, which is the iteration of the Baum-Welch algorithm.
 ```
 
-### Train all 5 models at once, and calculate models' test score every iteration
+### Train all models at once, along with the calculation of the HMM's test score in every iteration **(Suggest Usage)**
 ```
 └── src/
     ├── make clean
