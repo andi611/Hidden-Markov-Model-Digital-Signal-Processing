@@ -4,10 +4,9 @@
 
 
 ## Environment
-#### Tested environments:
 * **< g++ [gcc version 7.3.0 (GCC)] >** 
 * **< g++ [gcc version 4.2.1 (GCC)] >**
-
+  (Tested environments)
 
 ## Algorithm
 
@@ -94,4 +93,6 @@
 
 
 ## Experinment: Iteration v.s. Accuracy Plot
-![]()
+* Result: Maximum Accuracy **0.8708** achieved at the 2560-th iteration
+* Training Plot:
+  ![]()

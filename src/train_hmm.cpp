@@ -126,12 +126,11 @@ void train_with_iteration_test(vector<HMM*>* HMM_HEAD, int iteration, string dat
 			cout << "\r" << "Computing model: " << m << '/' << HMM_HEAD->size() << "..." << flush; 
 			hmm = HMM_HEAD->at(m);
 			hmm->train_HMM(1, &datas.at(m), false);
-			if (((iter+1) / 100) == 0) hmm->dump_HMM(open_file(hmm->get_name().c_str(), "w"), false);
 		}
 		
 		// test with all models
 		acc = test(HMM_HEAD, &test_data, "../data/testing_result1.txt", false);
-		acc_file << acc << ' ' << iter << '\n';
+		acc_file << acc << ' ' << iter+1 << '\n';
 		cout << "\r" << "[HMM training] Iteration: " << iter + 1 << '/' << iteration << ", Accuracy: " << acc;
 		
 		// save best
@@ -278,14 +277,14 @@ void HMM::apply_update(vector<double>* pi_accumulate,
 					   vector<double>* B_den_accumulate,
 					   double num_sample)
 {
-	// apply to pi
+	// update pi
 	for (int i = 0; i < N_S; i++)
 		PI(i) = pi_accumulate->at(i) / num_sample;
-	// apply to _transition
+	// update _transition
 	for (int i = 0; i < N_S; ++i)
 		for (int j = 0; j < N_S; ++j)
 			A(i, j) = epsilon_accumulate->at(i).at(j) / gamma_accumulate->at(i);
-	// apply to _observation
+	// update _observation
 	for (int i = 0; i < N_S; ++i)
 		for (int t = 0; t < N_O; ++t)
 			B(i, t) = B_num_accumulate->at(i).at(t) / B_den_accumulate->at(i);
