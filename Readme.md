@@ -6,8 +6,12 @@
 * **< g++ [gcc version 4.2.1 (GCC)] >**
 
 ## Algorithm
-* **Initialization**: Set θ=(A,B,π) \theta =(A,B,\pi ) with random initial conditions
-* **Forward**:
+* **Initialization**: 
+	- Set θ=(A,B,π) with initial conditions (model_init.txt)
+* **Forward Procedure**: 
+	- Compute αi(t)=P(Y1=y1,...,Yt=yt,Xt=i|θ) recursively, the probability of seeing the y1,y2,...,yt and being in state i at time t.
+	- {\displaystyle \alpha _{i}(1)=\pi _{i}b_{i}(y_{1}),}
+	- {\displaystyle \alpha _{i}(t+1)=b_{i}(y_{t+1})\sum _{j=1}^{N}\alpha _{j}(t)a_{ji}.}
 
 ## File Description
 ```
