@@ -6,7 +6,7 @@
 ## Environment
 * **< g++ [gcc version 7.3.0 (GCC)] >** 
 * **< g++ [gcc version 4.2.1 (GCC)] >**
-  (Tested environments)
+* (Tested environments)
 
 ## Algorithm
 
@@ -93,7 +93,6 @@
 
 
 ## Experinment: Iteration v.s. Accuracy Plot
-* **Result**: 
-  - Maximum Accuracy **0.8708** achieved at the 2560-th iteration
+* **Result**: Maximum Accuracy **0.8708** achieved at the 2560-th iteration
 * **Training Plot**:
   ![](https://github.com/andi611/DSP_HiddenMarkovModel/blob/master/data/acc.jpeg)
