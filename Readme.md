@@ -5,31 +5,35 @@
 * **< g++ [gcc version 7.3.0 (GCC)] >**
 * **< g++ [gcc version 4.2.1 (GCC)] >**
 
-## File description
+## Algorithm
+* **Initialization**: Set θ=(A,B,π) \theta =(A,B,\pi ) with random initial conditions
+* **Forward**:
+
+## File Description
 ```
 .
 ├── src/
-|   ├── Makefile                make file
-|   ├── hmm.h                   
-|   ├── hmm.cpp
-|   ├── test_hmm.cpp
-|   ├── train_hmm.cpp
+|   ├── Makefile                g++ compiler make file
+|   ├── hmm.h                   HMM implementation
+|   ├── hmm.cpp                 HMM implementation
+|   ├── test_hmm.cpp            Testing algorithm implementation
+|   ├── train_hmm.cpp           Training algorithm implementation
 |   ├── test                    Unix executable binary code for test_hmm.cpp
 |   ├── train                   Unix executable binary code for train_hmm.cpp
-|   ├── model_01~05.txt         trained model
-|   └── modellist.txt           model name list
+|   ├── model_01~05.txt         Trained models
+|   └── modellist.txt           Model name list
 ├── data/
-|   ├── model_init.txt          initial model for training
-|   ├── seq_model_01~05.txt     training data observation
-|   ├── testing_data1.txt       testing data observation
-|   ├── testing_answer.txt      real answer for "testing_data1.txt"
-|   ├── testing_result.txt      model generated answer for "testing_data1.txt"
-|   └── testing_data2.txt       testing data without answer
-└── problem_description.pdf     spec
-└── Readme.md                   this file
+|   ├── model_init.txt          Initial model for training
+|   ├── seq_model_01~05.txt     Training data (observation sequences)
+|   ├── testing_data1.txt       Testing data (observation sequences)
+|   ├── testing_answer.txt      Real answer for "testing_data1.txt"
+|   ├── testing_result.txt      Model generated answer for "testing_data1.txt"
+|   └── testing_data2.txt       Testing data without answer
+└── problem_description.pdf     Work Spec
+└── Readme.md                   This File
 ```
 
-## Program Execution
+## Usage
 ### Train all 5 models separately then test
 ```
 └── src/
@@ -62,5 +66,5 @@
 - #iteration is positive integer, which is the iteration of the Baum-Welch algorithm.
 ```
 
-## Iteration v.s. Accuracy Plot
+## Experinment: Iteration v.s. Accuracy Plot
 ![]()
