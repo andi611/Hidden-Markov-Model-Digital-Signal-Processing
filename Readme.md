@@ -93,6 +93,7 @@
 
 
 ## Experinment: Iteration v.s. Accuracy Plot
-* Result: Maximum Accuracy **0.8708** achieved at the 2560-th iteration
-* Training Plot:
+* **Result**: 
+  Maximum Accuracy **0.8708** achieved at the 2560-th iteration
+* **Training Plot**:
   ![](https://github.com/andi611/DSP_HiddenMarkovModel/blob/master/data/acc.jpeg)
