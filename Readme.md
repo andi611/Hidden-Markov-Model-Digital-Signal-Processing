@@ -8,18 +8,25 @@
 
 
 ## Algorithm
+
+### Training - [Baum Welch algorithm](https://en.wikipedia.org/wiki/Baum–Welch_algorithm)
 * **Initialization**: 
-	- Set θ = ( A , B , π ) with initial conditions (model_init.txt)
+	- Set **θ = ( A , B , π )** with initial conditions (model_init.txt)
 * **Forward Procedure**: 
-	- Compute αi(t) = P( O1=o1, ..., Ot=ot, qt=i | θ ) recursively, the probability of seeing the observation sequence o1, o2, ..., ot and being in state i at time t.
+	- Compute **αi(t) = P( O1=o1, ..., Ot=ot, qt=i | θ )** recursively, the probability of seeing the observation sequence **o1, o2, ..., ot** and being in state **i** at time **t**.
 * **Backward Procedure**: 
-	- Compute βi(t) = P( Ot+1=ot+1, ..., OT=oT | qt=i, θ) recursively, the probability of the ending partial observation sequence ot+1, ..., oT given starting state i at time t.
+	- Compute **βi(t) = P( Ot+1=ot+1, ..., OT=oT | qt=i, θ )** recursively, the probability of the ending partial observation sequence **ot+1, ..., oT** given starting state **i** at time **t**.
 * **Accumulation Procedure**:
 	- Calculate the temporary variables, according to Bayes' theorem.
-	- Gamma: the probability of being in state i at time t given the observed sequence O and the parameters θ.
-	- Epsilon: the probability of being in state i and j at times t and t+1 respectively given the observed sequence O and parameters θ.
+	- Gamma: the probability of being in state **i** at time **t** given the observed sequence **O** and the parameters **θ**.
+	- Epsilon: the probability of being in state **i** and **j** at times **t** and **t+1** respectively given the observed sequence **O** and parameters **θ**.
 * **Update Procedure**:
-	- Parameters of the hidden Markov model θ can now be updated: ( A , B , π ) = ( A* , B* , π* ) 
+	- Parameters of the hidden Markov model θ can now be updated: **( A , B , π ) = ( A* , B* , π* )**
+
+### Testing - [Viterbi Algorithm](https://en.wikipedia.org/wiki/Viterbi_algorithm)
+* A dynamic programming algorithm for finding the most likely sequence of hidden states, that results in a sequence of observed events.
+* Given a hidden Markov model (HMM) with state space **Q**, initial probabilities **πi** of being in state **i** and transition probabilities **a(i,j)** of transitioning from state **i** to state **j**. Say we observe outputs **o1, ..., oT**. The most likely state sequence **q1, ..., qT** that produces the observations is given by the Viterbi relations.
+* This algorithm generates a path **Q = ( q1, q2, ..., qT )**, which is a sequence of states **qt ∈ Q = { q1, q2, ..., qK }** that generate the observations **O = ( o1, o2, ..., oT )** with **on ∈ O = { o1, o2, ..., oN }**, N being the count of observations.
 
 
 ## File Description
