@@ -32,6 +32,7 @@ int main(int argc, char** argv)
 		hmm->load_HMM(model_init);
 		hmm->set_name(model_name);
 		train(hmm, iteration, data_path);
+		delete hmm;
 	}
 
 	// Usage: ./train 100 ../data/model_init.txt ../data/ modellist.txt all
@@ -55,7 +56,11 @@ int main(int argc, char** argv)
 
 		vector<vector<char>> test_data = read_data("../data/testing_data1.txt");
 		double acc = test(HMM_HEAD, &test_data, "../data/testing_result1.txt");
+
+		for (int i = 0; i < HMM_HEAD->size(); ++i)
+			delete HMM_HEAD->at(i);
 	}
+
 	// Usage: ./train 3000 ../data/model_init.txt ../data/ modellist.txt all test
 	else if (argc == 7) {
 
@@ -70,11 +75,17 @@ int main(int argc, char** argv)
 
 		vector<HMM*>* HMM_HEAD = initialize_new_models(model_init, model_list, NUM_MODEL);
 		train_with_iteration_test(HMM_HEAD, iteration, data_path);
+		
+		for (int i = 0; i < HMM_HEAD->size(); ++i)
+			delete HMM_HEAD->at(i);
 	}
+
 	else {
 		cout << "[HMM Train Usage]:" << endl;
-		cout << " - Train single model: /train iteration ../data/model_init.txt ../data/seq_model_xx.txt model_xx.txt" << endl;
-		cout << " - Train all models:   /train iteration ../data/model_init.txt ../data/ modellist.txt all" << endl;
+		cout << " - Train single model: 				/train iteration ../data/model_init.txt ../data/seq_model_xx.txt model_xx.txt" << endl;
+		cout << " - Train all models:   				/train iteration ../data/model_init.txt ../data/ modellist.txt all" << endl;
+		cout << " - Train all models with test score:   /train iteration ../data/model_init.txt ../data/ modellist.txt all test" << endl;
+		cout << " - See Readme.md for more details." << endl;
 		exit(-1);
 	}
 	return 0;
@@ -107,7 +118,7 @@ void train_with_iteration_test(vector<HMM*>* HMM_HEAD, int iteration, string dat
 
 	// initialize files
 	ofstream acc_file;
-	acc_file.open("../data/acc.txt");
+	acc_file.open("../data/training_log.txt");
 
 	// read all data
 	vector<vector<vector<char>>> datas;
@@ -289,3 +300,4 @@ void HMM::apply_update(vector<double>* pi_accumulate,
 		for (int t = 0; t < N_O; ++t)
 			B(i, t) = B_num_accumulate->at(i).at(t) / B_den_accumulate->at(i);
 }
+

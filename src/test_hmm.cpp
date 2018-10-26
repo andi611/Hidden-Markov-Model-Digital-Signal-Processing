@@ -33,6 +33,9 @@ int main(int argc, char** argv)
 
 	// test with models
 	double acc = test(HMM_HEAD, &test_data, output_path);
+	
+	for (int i = 0; i < HMM_HEAD->size(); ++i)
+		delete HMM_HEAD->at(i);
 	return 0;
 }
 
