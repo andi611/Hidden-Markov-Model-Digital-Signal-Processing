@@ -1,5 +1,6 @@
 # Digital Signal Processing: Discrete HMM
 - **Discrete Hidden Markov Model Implementation in C++**
+- Implemented based on the course DSP offered by NTU: [HMM.pdf](https://drive.google.com/file/d/1mDkCqMQ3DoAsyoTG0nysyx3h-6ehDcmi/view?usp=sharing)
 
 
 ## Environment
