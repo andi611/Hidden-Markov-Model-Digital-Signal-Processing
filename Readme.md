@@ -28,8 +28,8 @@
 
 ### Testing - [Viterbi Algorithm](https://en.wikipedia.org/wiki/Viterbi_algorithm)
 * A dynamic programming algorithm for finding the most likely sequence of hidden states, that results in a sequence of observed events.
-* Given a hidden Markov model (HMM) with state space **Q**, initial probabilities **πi** of being in state **i** and transition probabilities **a(i,j)** of transitioning from state **i** to state **j**. Say we observe outputs **o1, ..., oT**. The most likely state sequence **q1, ..., qT** that produces the observations is given by the Viterbi relations.
-* This algorithm generates a path **Q = ( q1, q2, ..., qT )**, which is a sequence of states **qt ∈ Q = { q1, q2, ..., qK }** that generate the observations **O = ( o1, o2, ..., oT )** with **on ∈ O = { o1, o2, ..., oN }**, N being the count of observations.
+* Given a hidden Markov model (HMM) with state space **Q**, initial probabilities **π<sub>i</sub>** of being in state **i** and transition probabilities **a<sub>(i,j)</sub>** of transitioning from state **i** to state **j**. Say we observe outputs **o<sub>1</sub>, ..., o<sub>T</sub>**. The most likely state sequence **q<sub>1</sub>, ..., q<sub>T</sub>** that produces the observations is given by the Viterbi relations.
+* This algorithm generates a path **Q = ( q<sub>1</sub>, q<sub>2</sub>, ..., q<sub>T</sub> )**, which is a sequence of states **q<sub>t</sub> ∈ Q = { q<sub>1</sub>, q<sub>2</sub>, ..., q<sub>K</sub> }** that generate the observations **O = ( o<sub>1</sub>, o<sub>2</sub>, ..., o<sub>T</sub> )** with **on ∈ O = { o<sub>1</sub>, o<sub>2</sub>, ..., o<sub>N</sub> }**, N being the count of observations.
 
 
 ## File Description
