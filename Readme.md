@@ -9,7 +9,7 @@
 * **< g++ [gcc version 4.2.1 (GCC)] >** (Tested)
 * **< Python 3.6+ >**                   (Optional - for plot.py)
 * **< Matplotlib 2.2.3 >**              (Optional - for plot.py)
-
+ 
 ## Algorithm
 
 ### Training - [Baum Welch algorithm](https://en.wikipedia.org/wiki/Baum–Welch_algorithm)
