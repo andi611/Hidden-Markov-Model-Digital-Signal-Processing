@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 def get_config():
 	parser = argparse.ArgumentParser(description='plot argument parser')
 	parser.add_argument('--input_path', type=str, default='../data/training_log.txt', help='input data path')
-	parser.add_argument('--output_path', type=str, default='../data/acc.jpeg', help='output data path')
+	parser.add_argument('--output_path', type=str, default='../data/acc.png', help='output data path')
 	args = parser.parse_args()
 	return args
 
@@ -59,7 +59,7 @@ def main():
 	plt.plot(x_data, y_data, 'o')
 	plt.ylabel('Accuracy')
 	plt.xlabel('Iteration')
-	plt.title('Iteration v.s. Iteration')
+	plt.title('Accuracy v.s. Iteration')
 	plt.grid()
 	plt.tight_layout()
 	plt.savefig(args.output_path)
