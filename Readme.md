@@ -24,7 +24,7 @@
 	- Gamma: the probability of being in state **i** at time **t** given the observed sequence **O** and the parameters **θ**.
 	- Epsilon: the probability of being in state **i** and **j** at times **t** and **t+1** respectively given the observed sequence **O** and parameters **θ**.
 * **Update Procedure**:
-	- Parameters of the hidden Markov model θ can now be updated: **( A , B , π ) = ( A^ , B^ , π^ )**
+	- Parameters of the hidden Markov model θ can now be updated: **( A , B , π ) = ( A<sup>\*</sup> , B<sup>\*</sup> , π<sup>\*</sup> )**
 
 ### Testing - [Viterbi Algorithm](https://en.wikipedia.org/wiki/Viterbi_algorithm)
 * A dynamic programming algorithm for finding the most likely sequence of hidden states, that results in a sequence of observed events.
