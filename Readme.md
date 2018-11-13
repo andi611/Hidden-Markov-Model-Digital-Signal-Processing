@@ -16,9 +16,9 @@
 * **Initialization**: 
 	- Set **θ = ( A , B , π )** with initial conditions (model_init.txt)
 * **Forward Procedure**: 
-	- Compute **α<sub>i<sub>(t) = P( O<sub>1<sub>=o<sub>1<sub>, ..., O<sub>t<sub>=o<sub>t<sub>, q<sub>t<sub>=i | θ )** recursively, the probability of seeing the observation sequence **o<sub>1<sub>, o<sub>2<sub>, ..., o<sub>t<sub>** and being in state **i** at time **t**.
+	- Compute **α<sub>i</sub>(t) = P( O<sub>1</sub>=o<sub>1</sub>, ..., O<sub>t</sub>=o<sub>t</sub>, q<sub>t</sub>=i | θ )** recursively, the probability of seeing the observation sequence **o<sub>1</sub>, o<sub>2</sub>, ..., o<sub>t</sub>** and being in state **i** at time **t**.
 * **Backward Procedure**: 
-	- Compute **β<sub>i<sub>(t) = P( O<sub>t+1<sub>=o<sub>t+1<sub>, ..., O<sub>T<sub>=o<sub>T<sub> | q<sub>t<sub>=i, θ )** recursively, the probability of the ending partial observation sequence **o<sub>t+1<sub>, o<sub>t+2<sub>, ..., o<sub>T<sub>** given starting state **i** at time **t**.
+	- Compute **β<sub>i</sub>(t) = P( O<sub>t+1</sub>=o<sub>t+1</sub>, ..., O<sub>T</sub>=o<sub>T</sub> | q<sub>t</sub>=i, θ )** recursively, the probability of the ending partial observation sequence **o<sub>t+1</sub>, o<sub>t+2</sub>, ..., o<sub>T</sub>** given starting state **i** at time **t**.
 * **Accumulation Procedure**:
 	- Calculate the temporary variables, according to Bayes' theorem.
 	- Gamma: the probability of being in state **i** at time **t** given the observed sequence **O** and the parameters **θ**.
