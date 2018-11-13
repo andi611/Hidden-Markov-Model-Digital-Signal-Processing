@@ -59,7 +59,7 @@ def main():
 	plt.plot(x_data, y_data, 'o')
 	plt.ylabel('Accuracy')
 	plt.xlabel('Iteration')
-	plt.title('Accuracy v.s. Iteration')
+	plt.title('Accuracy vs. Iteration')
 	plt.grid()
 	plt.tight_layout()
 	plt.savefig(args.output_path)
