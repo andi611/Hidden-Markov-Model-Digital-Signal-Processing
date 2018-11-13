@@ -53,7 +53,7 @@
 |   ├── testing_answer.txt      Real answer for "testing_data1.txt"
 |   ├── testing_result.txt      Model generated answer for "testing_data1.txt"
 |   └── testing_data2.txt       Testing data without answer
-├──problem_description.pdf     Work Spec
+├──problem_description.pdf      Work Spec
 └── Readme.md                   This File
 ```
 
